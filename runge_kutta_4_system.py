@@ -4,7 +4,7 @@ def rk4_system(f, f_actual, t, y, p, h, N):
 	n = int((p-t)/h)
 	zeroes = [0 for i in range(N)]
 	k = [zeroes.copy() for i in range(4)]
-	y_temp = [0]*N
+	y_temp = zeroes.copy()
 	results = [zeroes.copy() for i in range(n)]
 
 	for i in range(n):
@@ -18,7 +18,6 @@ def rk4_system(f, f_actual, t, y, p, h, N):
 
 		for j in range(N):												# Filling in the k2_x for all given functions
 			k[1][j] = h*f[j](t+h/2, *y_temp)
-
 
 		for j in range(N):												# Again need to update the y's for k3_x calculations
 			y_temp[j] = y[j] + k[1][j]/2
